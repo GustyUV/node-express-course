@@ -1,6 +1,8 @@
 const express = require('express');
-const app = express();
+const path = require('path');
 const bodyParser = require('body-parser');
+const app = express();
+
 
 app.use(bodyParser.json());
 
@@ -8,6 +10,8 @@ const mockUserData = [
 	{name: 'Gustavo'},
 	{name: 'Emilio'}
 ];
+
+// #region GET
 
 app.get('/users',function(req,res){
 	res.json({
@@ -26,6 +30,14 @@ app.get('/users/:id', function(req, res){
 		users: req.params.id
 	})
 });
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/index.html'));
+});
+
+// #endregion GET
+
+// #region POST
 
 app.post('/login', function(req, res){
 	const username = req.body.username;
@@ -49,6 +61,9 @@ app.post('/login', function(req, res){
 	}
 });
 
+// #endregion POST
+
+// listen port
 app.listen(8000, function(){
 	console.log("Server is running...");
 });
