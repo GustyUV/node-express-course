@@ -6,11 +6,13 @@ const mockUserData = [
 	{name: 'Emilio'}
 ];
 
-app.get('/users', function(req, res){
+// In Express, words with a colon in front of them in the url are treated as variables.
+app.get('/users/:id', function(req, res){
+	console.log(req.params.id);
 	res.json({
 		success: true,
-		message: 'Successfully got users"',
-		users: mockUserData
+		message: 'Got one user',
+		users: req.params.id
 	})
 });
 
